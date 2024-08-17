@@ -1,132 +1,103 @@
-import * as React from "react";
+import { useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
-import Animated, {
-  FadeInUp,
-  FadeOutDown,
-  LayoutAnimationConfig,
-} from "react-native-reanimated";
-import { Info } from "~/lib/icons/Info";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
-import { Progress } from "~/components/ui/progress";
 import { Text } from "~/components/ui/text";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "~/components/ui/tooltip";
 import { Input } from "~/components/ui/input";
-
-const GITHUB_AVATAR_URI =
-  "https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg";
+import { Eye } from "~/lib/icons/Eye";
+import { EyeOff } from "~/lib/icons/EyeOff";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function Screen() {
-  const [progress, setProgress] = React.useState(78);
-
-  function updateProgressValue() {
-    setProgress(Math.floor(Math.random() * 100));
-  }
+  const [hide, setHide] = useState(true);
   return (
-    <View className="flex-1 justify-center items-center gap-5 p-12 bg-secondary/30">
-      {/* <Card className="w-full max-w-sm p-6 rounded-2xl">
-        <CardHeader className="items-center">
-          <Avatar alt="Rick Sanchez's Avatar" className="w-24 h-24">
-            <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
-            <AvatarFallback>
-              <Text>RS</Text>
-            </AvatarFallback>
-          </Avatar>
-          <View className="p-3" />
-          <CardTitle className="pb-2 text-center">Rick Sanchez</CardTitle>
-          <View className="flex-row">
-            <CardDescription className="text-base font-semibold">
-              Scientist
-            </CardDescription>
-            <Tooltip delayDuration={150}>
-              <TooltipTrigger className="px-2 pb-0.5 active:opacity-50">
-                <Info
-                  size={14}
-                  strokeWidth={2.5}
-                  className="w-4 h-4 text-foreground/70"
-                />
-              </TooltipTrigger>
-              <TooltipContent className="py-2 px-4 shadow">
-                <Text className="native:text-lg">Freelance</Text>
-              </TooltipContent>
-            </Tooltip>
-          </View>
-        </CardHeader>
-        <CardContent>
-          <View className="flex-row justify-around gap-3">
-            <View className="items-center">
-              <Text className="text-sm text-muted-foreground">Dimension</Text>
-              <Text className="text-xl font-semibold">C-137</Text>
-            </View>
-            <View className="items-center">
-              <Text className="text-sm text-muted-foreground">Age</Text>
-              <Text className="text-xl font-semibold">70</Text>
-            </View>
-            <View className="items-center">
-              <Text className="text-sm text-muted-foreground">Species</Text>
-              <Text className="text-xl font-semibold">Human</Text>
-            </View>
-          </View>
-        </CardContent>
-        <CardFooter className="flex-col gap-3 pb-0">
-          <View className="flex-row items-center overflow-hidden">
-            <Text className="text-sm text-muted-foreground">Productivity:</Text>
-            <LayoutAnimationConfig skipEntering>
-              <Animated.View
-                key={progress}
-                entering={FadeInUp}
-                exiting={FadeOutDown}
-                className="w-11 items-center"
-              >
-                <Text className="text-sm font-bold text-sky-600">
-                  {progress}%
-                </Text>
-              </Animated.View>
-            </LayoutAnimationConfig>
-          </View>
-          <Progress
-            value={progress}
-            className="h-2"
-            indicatorClassName="bg-sky-600"
+    <View className="flex-1 justify-between items-center gap-5 p-12">
+      <View className="w-full justify-center items-center gap-5">
+        <Avatar alt="Glodifi logo" className="w-[168px] h-[168px] rounded-none">
+          <AvatarImage source={require("@/../assets/images/logo.png")} />
+          <AvatarFallback>
+            <Text style={{ fontFamily: "Poppins-Regular", fontSize: 30 }}>
+              Glodifi
+            </Text>
+          </AvatarFallback>
+        </Avatar>
+        <Text className="text-xl font-bold mb-[45px]">
+          Welcome back to our app
+        </Text>
+        <View className="flex items-center gap-6 w-full mb-[30px]">
+          <Input
+            placeholder="Enter Username"
+            keyboardType="email-address"
+            autoComplete="email"
+            className="w-full"
           />
-          <View />
-          <Button
-            variant="outline"
-            className="shadow shadow-foreground/5"
-            onPress={updateProgressValue}
-          >
-            <Text>Update</Text>
+          <View className="relative w-full">
+            <Input
+              placeholder="Enter Password"
+              autoComplete="password"
+              secureTextEntry={hide}
+            />
+            {hide ? (
+              <Button
+                variant={"ghost"}
+                className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0"
+                size={"sm"}
+                onPress={() => setHide(false)}
+              >
+                <EyeOff
+                  className="text-muted-foreground"
+                  size={24}
+                  strokeWidth={1.25}
+                />
+              </Button>
+            ) : (
+              <Button
+                variant={"ghost"}
+                className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0"
+                size={"sm"}
+                onPress={() => setHide(true)}
+              >
+                <Eye
+                  className="text-muted-foreground"
+                  size={24}
+                  strokeWidth={1.25}
+                />
+              </Button>
+            )}
+          </View>
+          <Button onPress={() => {}} variant={"grey"} className="w-[190px]">
+            <Text>Log in</Text>
           </Button>
-        </CardFooter>
-      </Card> */}
-      <Avatar alt="Glodifi logo" className="w-[168px] h-[168px] rounded-none">
-        <AvatarImage source={require("@/../assets/images/logo.png")} />
-        <AvatarFallback>
-          <Text style={{ fontFamily: "Poppins-Regular", fontSize: 30 }}>
-            Glodifi
-          </Text>
-        </AvatarFallback>
-      </Avatar>
-      <Text className="text-xl font-bold text-foreground mb-[45px]">
-        Welcome back to our app
-      </Text>
-      <View className="flex gap-[45px] w-full">
-        <Input placeholder="Enter Username" />
-        <Input placeholder="Enter Password" />
-        <Button onPress={() => {}}>
-          <Text>Login</Text>
+        </View>
+        <View className="border-[0.5px] border-black w-full max-w-[260px] mb-[30px]" />
+        <View className="flex flex-row items-center justify-center w-full">
+          <Text className="">Don’t have an account?</Text>
+          <Button
+            onPress={() => {}}
+            variant={"ghost"}
+            className="active:bg-transparent w-fit"
+            size={"sm"}
+          >
+            <Text className="font-bold">Sign up</Text>
+          </Button>
+        </View>
+      </View>
+      <View className="w-full justify-center items-center">
+        <Button
+          onPress={() => {}}
+          variant={"ghost"}
+          className="active:bg-transparent w-fit"
+          size={"sm"}
+        >
+          <Text className="font-bold">Have a business account?</Text>
+        </Button>
+        <Button
+          onPress={() => {}}
+          variant={"ghost"}
+          className="active:bg-transparent w-fit"
+          size={"sm"}
+        >
+          <Text className="text-[#663399]">Sign in as a professional</Text>
         </Button>
       </View>
     </View>
