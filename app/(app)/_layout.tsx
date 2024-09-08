@@ -1,12 +1,14 @@
 import { Text } from "react-native";
-import { Redirect, Stack } from "expo-router";
+import { Redirect } from "expo-router";
 import { Drawer } from "expo-router/drawer";
-
-import { ThemeToggle } from "~/components/ThemeToggle";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { useSession } from "~/lib/ctx";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import CustomHeader from "~/components/CustomHeader";
+import { useSession } from "~/lib/ctx";
+import { Settings } from "~/lib/icons/Settings";
+import { History } from "~/lib/icons/History";
+import { NotepadText } from "~/lib/icons/NotepadText";
+import { LayoutDashboard } from "~/lib/icons/LayoutDashboard";
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
@@ -32,6 +34,59 @@ export default function AppLayout() {
           name="index"
           options={{
             title: "Dashboard",
+            drawerLabelStyle: { fontFamily: "PoppinsSemiBold" },
+            drawerIcon: () => (
+              <LayoutDashboard
+                className="text-muted-foreground"
+                size={24}
+                strokeWidth={1.25}
+              />
+            ),
+            header: () => <CustomHeader />,
+          }}
+        />
+        <Drawer.Screen
+          name="new-booking"
+          options={{
+            title: "New Booking",
+            drawerLabelStyle: { fontFamily: "PoppinsSemiBold" },
+            drawerIcon: () => (
+              <NotepadText
+                className="text-muted-foreground"
+                size={24}
+                strokeWidth={1.25}
+              />
+            ),
+            header: () => <CustomHeader />,
+          }}
+        />
+        <Drawer.Screen
+          name="history"
+          options={{
+            title: "History",
+            drawerLabelStyle: { fontFamily: "PoppinsSemiBold" },
+            drawerIcon: () => (
+              <History
+                className="text-muted-foreground"
+                size={24}
+                strokeWidth={1.25}
+              />
+            ),
+            header: () => <CustomHeader />,
+          }}
+        />
+        <Drawer.Screen
+          name="settings"
+          options={{
+            title: "Settings",
+            drawerLabelStyle: { fontFamily: "PoppinsSemiBold" },
+            drawerIcon: () => (
+              <Settings
+                className="text-muted-foreground"
+                size={24}
+                strokeWidth={1.25}
+              />
+            ),
             header: () => <CustomHeader />,
           }}
         />

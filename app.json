@@ -22,7 +22,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.bijen_shrestha.Glosifi"
     },
     "web": {
       "bundler": "metro",
@@ -31,11 +32,34 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "~/assets/fonts/InterThin.ttf",
+            "~/assets/fonts/InterExtraLight.ttf",
+            "~/assets/fonts/InterLight.ttf",
+            "~/assets/fonts/InterRegular.ttf",
+            "~/assets/fonts/InterMedium.ttf",
+            "~/assets/fonts/InterSemiBold.ttf",
+            "~/assets/fonts/InterBold.ttf",
+            "~/assets/fonts/InterExtraBold.ttf",
+            "~/assets/fonts/InterBlack.ttf"
+          ]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "3c1a693d-18d6-4da3-965b-da075e2dd4e6"
+      }
     }
   }
 }

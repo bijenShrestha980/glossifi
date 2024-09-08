@@ -13,17 +13,18 @@ const buttonVariants = cva(
         destructive: "bg-destructive web:hover:opacity-90 active:opacity-90",
         outline:
           "border border-input bg-background web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
-        secondary: "bg-secondary web:hover:opacity-80 active:opacity-80",
+        secondary:
+          "bg-secondary text-secondary-foreground web:hover:opacity-80 active:opacity-80",
         ghost:
           "web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
         link: "web:underline-offset-4 web:hover:underline web:focus:underline",
         grey: "bg-[#D9D9D9] web:hover:bg-grey-90 active:bg-grey-80 active:bg-gray-200",
       },
       size: {
-        default:
-          "h-10 px-4 py-[10px] native:h-12 native:px-5 native:py-3 rounded-lg",
+        default: "h-12 px-4 native:h-12 native:px-5 native:py-3 rounded-lg",
         sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8 native:h-14",
+        lg: "h-14 rounded-md px-8 native:h-14",
+        fit: "h-fit w-fit p-0",
         icon: "h-10 w-10",
       },
     },
@@ -46,12 +47,13 @@ const buttonTextVariants = cva(
           "text-secondary-foreground group-active:text-secondary-foreground",
         ghost: "group-active:text-accent-foreground",
         link: "text-primary group-active:underline",
-        grey: "text-black group-active:text-black font-bold",
+        grey: "text-black group-active:text-black",
       },
       size: {
         default: "",
         sm: "",
         lg: "native:text-lg",
+        fit: "",
         icon: "",
       },
     },
