@@ -8,6 +8,7 @@ import { Input } from "~/components/ui/input";
 import { Eye } from "~/lib/icons/Eye";
 import { EyeOff } from "~/lib/icons/EyeOff";
 import { useSession } from "~/lib/ctx";
+import { Label } from "~/components/ui/label";
 
 export default function SignUp() {
   const { signIn } = useSession();
@@ -16,156 +17,202 @@ export default function SignUp() {
 
   return (
     <ScrollView>
-      <View className="flex-1 justify-between items-center gap-5 p-12">
-        <View className="w-full justify-center items-center gap-5">
-          <Avatar
-            alt="Glodifi logo"
-            className="w-[168px] h-[168px] rounded-none"
-          >
-            <AvatarImage source={require("@/../assets/images/logo.png")} />
-            <AvatarFallback>
-              <Text style={{ fontFamily: "Poppins-Regular", fontSize: 30 }}>
-                Glodifi
-              </Text>
-            </AvatarFallback>
-          </Avatar>
+      <View className="w-full items-center gap-5 px-6 p-10 pt-20">
+        <View className="w-full justify-center items-start gap-3 mb-12">
           <Text
-            className="text-xl mb-[45px] text-black"
-            style={{ fontFamily: "PoppinsBold" }}
+            style={{
+              fontFamily: "InterSemiBold",
+              fontSize: 28,
+              lineHeight: 40,
+            }}
           >
-            Welcome back to our app
+            Create an Account
           </Text>
-          <View className="flex items-center gap-6 w-full mb-[30px]">
-            <Input
-              placeholder="Email"
-              keyboardType="email-address"
-              autoComplete="email"
-              className="w-full"
-              style={{ fontFamily: "PoppinsRegular" }}
-            />
-            <Input
-              placeholder="First Name"
-              className="w-full"
-              style={{ fontFamily: "PoppinsRegular" }}
-            />
-            <Input
-              placeholder="Last Name"
-              className="w-full"
-              style={{ fontFamily: "PoppinsRegular" }}
-            />
-            <Input
-              placeholder="Mobile"
-              className="w-full"
-              keyboardType="phone-pad"
-              style={{ fontFamily: "PoppinsRegular" }}
-            />
-
-            <View className="relative w-full">
-              <Input
-                placeholder="Enter Password"
-                autoComplete="password"
-                secureTextEntry={hide}
-                style={{ fontFamily: "PoppinsRegular" }}
-              />
-              {hide ? (
-                <Button
-                  variant={"ghost"}
-                  className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0"
-                  size={"sm"}
-                  onPress={() => setHide(false)}
-                >
-                  <EyeOff
-                    className="text-muted-foreground"
-                    size={24}
-                    strokeWidth={1.25}
-                  />
-                </Button>
-              ) : (
-                <Button
-                  variant={"ghost"}
-                  className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0"
-                  size={"sm"}
-                  onPress={() => setHide(true)}
-                >
-                  <Eye
-                    className="text-muted-foreground"
-                    size={24}
-                    strokeWidth={1.25}
-                  />
-                </Button>
-              )}
+        </View>
+        <View className="w-full justify-center items-start">
+          <View className="w-full flex items-center gap-4 mb-6">
+            <View className="w-full flex flex-row justify-between items-center gap-4">
+              <View className="flex-1 gap-2">
+                <Label nativeID="firstName" className="medium-text">
+                  First Name
+                </Label>
+                <Input
+                  placeholder="Enter First name"
+                  className="w-full"
+                  style={{ fontFamily: "InterRegular" }}
+                />
+              </View>
+              <View className="flex-1 gap-2">
+                <Label nativeID="lastName" className="medium-text">
+                  Last Name
+                </Label>
+                <Input
+                  placeholder="Enter Last name"
+                  className="w-full"
+                  style={{ fontFamily: "InterRegular" }}
+                />
+              </View>
             </View>
-            <View className="relative w-full">
+            <View className="w-full flex gap-2">
+              <Label nativeID="email" className="medium-text">
+                Email Address
+              </Label>
               <Input
-                placeholder="Confirm Password"
-                autoComplete="password"
-                secureTextEntry={hideConfirm}
-                style={{ fontFamily: "PoppinsRegular" }}
+                placeholder="Enter Email"
+                keyboardType="email-address"
+                autoComplete="email"
+                className="w-full"
+                style={{ fontFamily: "InterRegular" }}
               />
-              {hideConfirm ? (
-                <Button
-                  variant={"ghost"}
-                  className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0"
-                  size={"sm"}
-                  onPress={() => setHideConfirm(false)}
-                >
-                  <EyeOff
-                    className="text-muted-foreground"
-                    size={24}
-                    strokeWidth={1.25}
-                  />
-                </Button>
-              ) : (
-                <Button
-                  variant={"ghost"}
-                  className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0"
-                  size={"sm"}
-                  onPress={() => setHide(true)}
-                >
-                  <Eye
-                    className="text-muted-foreground"
-                    size={24}
-                    strokeWidth={1.25}
-                  />
-                </Button>
-              )}
             </View>
-            <Button
-              onPress={() => {
-                signIn();
-                // Navigate after signing in. You may want to tweak this to ensure sign-in is
-                // successful before navigating.
-                router.replace("/");
-              }}
-              variant={"secondary"}
-              className="w-[190px]"
-            >
-              <Text style={{ fontFamily: "PoppinsSemiBold" }}>Sign up</Text>
-            </Button>
+            <View className="w-full flex gap-2">
+              <Label nativeID="mobile" className="medium-text">
+                Phone Number
+              </Label>
+              <Input
+                placeholder="Enter Phone number"
+                keyboardType="phone-pad"
+                className="w-full"
+                style={{ fontFamily: "InterRegular" }}
+              />
+            </View>
+            <View className="w-full flex gap-2">
+              <Label nativeID="userName" className="medium-text">
+                User Name
+              </Label>
+              <Input
+                placeholder="Enter User name"
+                className="w-full"
+                style={{ fontFamily: "InterRegular" }}
+              />
+            </View>
+            <View className="w-full flex gap-2">
+              <Label nativeID="password" className="medium-text">
+                Password
+              </Label>
+              <View className="relative">
+                <Input
+                  placeholder="Enter Password"
+                  autoComplete="password"
+                  secureTextEntry={hide}
+                  style={{ fontFamily: "InterRegular" }}
+                />
+                {hide ? (
+                  <Button
+                    variant={"ghost"}
+                    className="active:bg-transparent h-full w-fit absolute right-0 top-0"
+                    size={"sm"}
+                    onPress={() => setHide(false)}
+                  >
+                    <EyeOff
+                      className="text-[#999DA3]"
+                      size={24}
+                      strokeWidth={2}
+                    />
+                  </Button>
+                ) : (
+                  <Button
+                    variant={"ghost"}
+                    className="active:bg-transparent h-full w-fit absolute right-0 top-0"
+                    size={"sm"}
+                    onPress={() => setHide(true)}
+                  >
+                    <Eye className="text-[#999DA3]" size={24} strokeWidth={2} />
+                  </Button>
+                )}
+              </View>
+            </View>
+            <View className="w-full flex gap-2">
+              <Label nativeID="password" className="medium-text">
+                Confirm Password
+              </Label>
+              <View className="relative">
+                <Input
+                  placeholder="Re-enter Password"
+                  autoComplete="password"
+                  secureTextEntry={hideConfirm}
+                  style={{ fontFamily: "InterRegular" }}
+                />
+                {hideConfirm ? (
+                  <Button
+                    variant={"ghost"}
+                    className="active:bg-transparent h-full w-fit absolute right-0 top-0"
+                    size={"sm"}
+                    onPress={() => setHideConfirm(false)}
+                  >
+                    <EyeOff
+                      className="text-[#999DA3]"
+                      size={24}
+                      strokeWidth={2}
+                    />
+                  </Button>
+                ) : (
+                  <Button
+                    variant={"ghost"}
+                    className="active:bg-transparent h-full w-fit absolute right-0 top-0"
+                    size={"sm"}
+                    onPress={() => setHide(true)}
+                  >
+                    <Eye className="text-[#999DA3]" size={24} strokeWidth={2} />
+                  </Button>
+                )}
+              </View>
+            </View>
           </View>
-          <View className="border-[0.5px] border-black w-full max-w-[260px] mb-[30px]" />
-          <View className="flex flex-row items-center justify-center w-full">
+          <View className="flex flex-row gap-2 mb-4">
             <Text
-              className="text-black"
-              style={{ fontFamily: "PoppinsRegular" }}
+              style={{
+                fontFamily: "InterRegular",
+                fontSize: 14,
+                color: "#999DA3",
+              }}
             >
-              Already have an account?
+              By continuing, you agree to our
             </Text>
-            <Button
-              variant={"ghost"}
-              className="active:bg-transparent w-fit ml-1 p-0"
-              size={"sm"}
+            <Link
+              href={"/terms-of-service"}
+              className="text-secondary"
+              style={{ fontFamily: "InterRegular", fontSize: 14 }}
             >
-              <Link href={"/sign-in"}>
-                <Text
-                  className="text-black"
-                  style={{ fontFamily: "PoppinsBold" }}
-                >
-                  Login
-                </Text>
-              </Link>
-            </Button>
+              terms of service
+            </Link>
           </View>
+          <Button
+            onPress={() => {
+              router.replace("/otp");
+            }}
+            variant={"secondary"}
+            className="w-full mb-4"
+          >
+            <Text
+              style={{
+                fontFamily: "InterMedium",
+                fontSize: 16,
+                lineHeight: 16,
+                color: "#FFFFFF",
+              }}
+            >
+              Sign Up
+            </Text>
+          </Button>
+        </View>
+        <View className="w-full flex flex-row justify-center items-center gap-1">
+          <Text
+            style={{
+              fontFamily: "InterRegular",
+              fontSize: 16,
+              color: "#999DA3",
+            }}
+          >
+            Already have an account?
+          </Text>
+          <Link
+            href={"/sign-in"}
+            className="text-secondary"
+            style={{ fontFamily: "InterSemiBold", fontSize: 16 }}
+          >
+            Sign in here
+          </Link>
         </View>
       </View>
     </ScrollView>

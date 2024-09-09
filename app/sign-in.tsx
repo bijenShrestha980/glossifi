@@ -2,19 +2,23 @@ import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Link, router } from "expo-router";
 import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { Checkbox } from "~/components/ui/checkbox";
+import { Separator } from "~/components/ui/seperator";
 import { Eye } from "~/lib/icons/Eye";
 import { EyeOff } from "~/lib/icons/EyeOff";
 import { useSession } from "~/lib/ctx";
-import { Text } from "~/components/ui/text";
-import { Input } from "~/components/ui/input";
 
 export default function SignIn() {
   const { signIn } = useSession();
   const [hide, setHide] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   return (
     <ScrollView>
-      <View className="flex-1 justify-between items-center gap-5 px-6 py-10">
+      <View className="w-full items-center gap-5 px-6 pb-10 pt-20">
         <View className="w-full justify-center items-start gap-3 mb-12">
           <Text
             style={{
@@ -27,116 +31,152 @@ export default function SignIn() {
           </Text>
           <Text
             className="text-[#555]"
-            style={{ fontFamily: "InterRegular", fontSize: 18, lineHeight: 26 }}
+            style={{
+              fontFamily: "InterRegular",
+              fontSize: 18,
+              lineHeight: 26,
+            }}
           >
             Welcome back to the app
           </Text>
         </View>
         <View className="w-full justify-center items-start">
-          <View className="w-full flex items-center gap-4">
-            <Input
-              placeholder="Enter Username"
-              keyboardType="email-address"
-              autoComplete="email"
-              className="w-full"
-              style={{ fontFamily: "PoppinsRegular" }}
-            />
-            <View className="relative w-full">
+          <View className="w-full flex items-center gap-4 mb-6">
+            <View className="w-full flex gap-2">
+              <Label nativeID="email" className="medium-text">
+                Email Address
+              </Label>
               <Input
-                placeholder="Enter Password"
-                autoComplete="password"
-                secureTextEntry={hide}
-                style={{ fontFamily: "PoppinsRegular" }}
+                placeholder="Enter Email Address"
+                keyboardType="email-address"
+                autoComplete="email"
+                className="w-full"
+                style={{ fontFamily: "InterRegular" }}
               />
-              {hide ? (
-                <Button
-                  variant={"ghost"}
-                  className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0"
-                  size={"sm"}
-                  onPress={() => setHide(false)}
-                >
-                  <EyeOff
-                    className="text-muted-foreground"
-                    size={24}
-                    strokeWidth={1.25}
-                  />
-                </Button>
-              ) : (
-                <Button
-                  variant={"secondary"}
-                  className="active:bg-transparent h-[46px] w-fit absolute right-0 top-0 bg-secondary"
-                  size={"sm"}
-                  onPress={() => setHide(true)}
-                >
-                  <Eye
-                    className="text-muted-foreground"
-                    size={24}
-                    strokeWidth={1.25}
-                  />
-                </Button>
-              )}
             </View>
-            <Button
-              onPress={() => {
-                signIn();
-                // Navigate after signing in. You may want to tweak this to ensure sign-in is
-                // successful before navigating.
-                router.replace("/");
-              }}
-              variant={"secondary"}
-              className="w-[190px] rounded-lg h-12 text-secondary-foreground "
-            >
-              <Text style={{ fontFamily: "PoppinsSemiBold" }}>Log in</Text>
-            </Button>
-          </View>
-          <View className="border-[0.5px] border-black w-full max-w-[260px] mb-[30px]" />
-          <View className="flex flex-row items-center justify-center w-full">
-            <Text
-              className="text-black"
-              style={{ fontFamily: "PoppinsRegular" }}
-            >
-              Don’t have an account?
-            </Text>
-            <Button
-              variant={"ghost"}
-              className="active:bg-transparent w-fit ml-1 p-0"
-              size={"sm"}
-            >
-              <Link href={"/sign-up"}>
-                <Text
-                  className="text-black"
-                  style={{ fontFamily: "PoppinsBold" }}
+            <View className="w-full flex gap-2">
+              <View className="flex flex-row justify-between items-center">
+                <Label nativeID="password" className="medium-text">
+                  Password
+                </Label>
+                <Link
+                  href={"/forgot-password"}
+                  className="text-secondary"
+                  style={{ fontFamily: "InterMedium", fontSize: 12 }}
                 >
-                  Sign up
-                </Text>
-              </Link>
-            </Button>
+                  Forgot Password?
+                </Link>
+              </View>
+              <View className="relative">
+                <Input
+                  placeholder="Enter Password"
+                  autoComplete="password"
+                  secureTextEntry={hide}
+                  style={{ fontFamily: "InterRegular" }}
+                />
+                {hide ? (
+                  <Button
+                    variant={"ghost"}
+                    className="active:bg-transparent h-full w-fit absolute right-0 top-0"
+                    size={"sm"}
+                    onPress={() => setHide(false)}
+                  >
+                    <EyeOff
+                      className="text-[#999DA3]"
+                      size={24}
+                      strokeWidth={2}
+                    />
+                  </Button>
+                ) : (
+                  <Button
+                    variant={"ghost"}
+                    className="active:bg-transparent h-full w-fit absolute right-0 top-0"
+                    size={"sm"}
+                    onPress={() => setHide(true)}
+                  >
+                    <Eye className="text-[#999DA3]" size={24} strokeWidth={2} />
+                  </Button>
+                )}
+              </View>
+            </View>
           </View>
+          <View className="flex flex-row gap-4 mb-4">
+            <Checkbox checked={checked} onCheckedChange={setChecked} />
+            <Text
+              style={{
+                fontFamily: "InterLight",
+                fontSize: 16,
+                color: "#191D23",
+              }}
+            >
+              Keep me signed in
+            </Text>
+          </View>
+          <Button
+            onPress={() => {
+              signIn();
+              router.replace("/");
+            }}
+            variant={"secondary"}
+            className="w-full mb-4"
+          >
+            <Text
+              style={{
+                fontFamily: "InterMedium",
+                fontSize: 16,
+                lineHeight: 16,
+                color: "#FFFFFF",
+              }}
+            >
+              Log in
+            </Text>
+          </Button>
+          {/* <View className="relative w-full mb-4">
+            <Separator className="absolute left-0 top-[20px]" />
+            <View className="w-full flex items-center">
+              <Text
+                style={{
+                  fontFamily: "InterRegular",
+                  fontSize: 14,
+                  color: "#999DA3",
+                  backgroundColor: "#FFFFFF",
+                  width: 130,
+                  padding: 8,
+                  textAlign: "center",
+                }}
+              >
+                or sign in with
+              </Text>
+            </View>
+          </View>
+          <Button
+            onPress={() => {
+              signIn();
+              router.replace("/");
+            }}
+            variant={"grey"}
+            className="w-full mb-4"
+          >
+            <Text
+              style={{
+                fontFamily: "InterMedium",
+                fontSize: 16,
+                lineHeight: 16,
+                color: "#4B5768",
+              }}
+            >
+              Continue with Google
+            </Text>
+          </Button> */}
         </View>
         <View className="w-full justify-center items-center">
-          <Button
-            onPress={() => {}}
-            variant={"ghost"}
-            className="active:bg-transparent w-fit"
-            size={"sm"}
+          <Link
+            href={"/sign-up"}
+            className="text-secondary"
+            style={{ fontFamily: "InterSemiBold", fontSize: 16 }}
           >
-            <Text className="text-black" style={{ fontFamily: "PoppinsBold" }}>
-              Have a business account?
-            </Text>
-          </Button>
-          <Button
-            onPress={() => {}}
-            variant={"ghost"}
-            className="active:bg-transparent w-fit"
-            size={"sm"}
-          >
-            <Text
-              className="text-[#663399]"
-              style={{ fontFamily: "PoppinsRegular" }}
-            >
-              Sign in as a professional
-            </Text>
-          </Button>
+            Create an account
+          </Link>
         </View>
       </View>
     </ScrollView>

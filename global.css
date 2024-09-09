@@ -14,8 +14,8 @@
     --primary-foreground: 11 100% 98%;
     --secondary: 11 84% 52%;
     --secondary-foreground: 0 100% 100%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 248 11% 61%;
+    --muted: 248 11% 61%;
+    --muted-foreground: 27 16% 84%;
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
@@ -46,4 +46,27 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }
+}
+
+@layer components {
+  .custom-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+}
+
+.light-text {
+  font-family: "InterLight";
+  font-size: 16px;
+}
+
+.regular-text {
+  font-family: "InterRegular";
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.medium-text {
+  font-family: "InterMedium";
+  font-size: 18px;
+  line-height: 24px;
 }

@@ -21,7 +21,8 @@ const buttonVariants = cva(
         grey: "bg-[#D9D9D9] web:hover:bg-grey-90 active:bg-grey-80 active:bg-gray-200",
       },
       size: {
-        default: "h-12 px-4 native:h-12 native:px-5 native:py-3 rounded-lg",
+        default:
+          "h-[48px] px-4 native:h-[48px] native:px-5 native:py-4 rounded-lg",
         sm: "h-9 rounded-md px-3",
         lg: "h-14 rounded-md px-8 native:h-14",
         fit: "h-fit w-fit p-0",

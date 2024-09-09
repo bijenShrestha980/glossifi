@@ -6,7 +6,7 @@ import { Theme, ThemeProvider } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import { Slot, SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Platform } from "react-native";
+import { Platform, SafeAreaView } from "react-native";
 import * as Font from "expo-font";
 
 import { NAV_THEME } from "~/lib/constants";
@@ -78,10 +78,12 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <SessionProvider>
-        <Slot />
-      </SessionProvider>
+      <SafeAreaView>
+        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+        <SessionProvider>
+          <Slot />
+        </SessionProvider>
+      </SafeAreaView>
       <PortalHost />
     </ThemeProvider>
   );
